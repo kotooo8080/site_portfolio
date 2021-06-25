@@ -1,20 +1,34 @@
 import React from 'react';
 import logo from "../images/logo.png";
 
-export default function Header() {
-
-    return (
-        <div className="headerBar">
-            <img src={logo} alt="logo"/>
-            <div className="headerMenu">
-                <a className="main" href="">home</a>
-                <a className="usual" href="">about</a>
-                <a className="usual" href="">info</a>
-                <a className="usual" href="">process</a>
-                <a className="usual" href="">projects</a>
-                <a className="usual" href="">contact</a>
+let refer;
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(name) {
+        console.log(name);
+        refer = document.getElementsByClassName(name)[0];
+        console.log(refer);
+        refer.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+        })
+    }
+    render() {
+        return (
+            <div className="headerBar">
+                <img src={logo} alt="logo"/>
+                <div className="headerMenu">
+                    <button className="main" >home</button>
+                    <button onClick={() => this.handleClick('about')} className="usual">about</button>
+                    <button onClick={() => this.handleClick('work')} className="usual" >process</button>
+                    <button onClick={() => this.handleClick('process')} className="usual" >projects</button>
+                    <button onClick={() => this.handleClick('contact')} className="usual" >contact</button>
+                </div>
             </div>
-        </div>
-
-    );
+        )
+    }
 }
+export default Header;
