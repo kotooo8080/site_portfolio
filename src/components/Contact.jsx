@@ -1,25 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 
-//Подъём состояния - передача состояния в родительский компонент
 class Contact extends React.Component {
-    //конструктор класса
     constructor(props) {
-        //В JavaScript-классах всегда нужно вызывать super при объявлении конструктора подкласса
-        //super - позволяет получить доступ к this.props
         super(props);
-        //устанавливаю начальное состояние
         this.state = {
             name: '',
             email: '',
             title: '',
             message: ''
         };
-        //bind позволяет связать this со значением функции
-        //преобразовает функцию в функцию с неименяемым значением this
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    //если изменено, то беру значение из элемента формы и записываю его в состояние
     onNameChange(event) {
         this.setState({name: event.target.value})
     }
@@ -32,22 +24,16 @@ class Contact extends React.Component {
     onMessageChange(event) {
         this.setState({message: event.target.value})
     }
-    //событие по нажатию кнопки  
     handleSubmit(event) {
         event.preventDefault();
-        //массив letter объединяет все части письма
         const letter = {
           name: this.state.name,
           email: this.state.email,
           title: this.state.title,
           message: this.state.message
         };
-        //API(Application Programming Interface) — это составляющая часть сервера, 
-        //которая получает запросы и отправляет ответы
-        //создание объекта запроса
         const api = axios.create({baseURL: 'http://localhost:8888/'})
         api.post("portfolio-php/api/contact.php", letter)
-        //если удачно
         .then((success) => {
             console.log(success)
         })
