@@ -11,23 +11,14 @@ import pr10 from "../images/pr10.png";
 const ref = React.createRef();
 class Projects extends React.Component {
     constructor(props) {
-        /*super позволяет получить доступ к this.props в конструкторе
-        конструктор дочернего класса не может использовать this 
-        пока не будет вызван вызов super()*/
         super(props);
         this.state = {toggleOn: false};
-
-        /*для работы this в колбэке
-        явно привязываем this значение к функции*/
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
-        //устанавливаем состояние для кнопки(если true, то ставим false)
         this.setState(state => ({
             toggleOn: !state.toggleOn
         }))
-        //определяем тип скролла, если div открыт полностью, то прокручиваем до начала блока, если открыт не полностью, то 
-        //прокручиваем к концу
         if(this.state.toggleOn) {
             ref.current.scrollIntoView({
                 behavior: 'smooth',
@@ -49,7 +40,6 @@ class Projects extends React.Component {
     }
     render () {
         return(
-            /*Устанавливаем ссылку на блок, чтобы добавить ему скролл */
             <div ref={ref} className="sites">
                 <img src={pr4} alt=""/>
                 <img src={pr2} alt=""/>
@@ -59,7 +49,6 @@ class Projects extends React.Component {
                 <img src={pr3} alt=""/>
                 <img src={pr7} alt=""/>
                 <img src={pr9} alt=""/>
-                {/* Устанавливаем класс для изображения в зависимости от нажатия кнопки */}
                 <img className={this.state.toggleOn ? 'btn_show' : 'none'} src={pr4} alt=""/>
                 <img className={this.state.toggleOn ? 'btn_show' : 'none'} src={pr2} alt=""/>
                 <img className={this.state.toggleOn ? 'btn_show' : 'none'} src={pr6} alt=""/>
